@@ -1,0 +1,44 @@
+[
+	{
+		"name": "launch",
+		"description": "Launch the specified instance.",
+		"type": 1,
+		"options": [
+			{
+				"name": "instance_name",
+				"description": "The instance to launch.",
+				"type": 3,
+				"required": true,
+				"autocomplete": true
+			}
+		]
+	},
+	{
+		"name": "shutdown",
+		"description": "Shutdown the specified instance.",
+		"type": 1,
+		"options": [
+			{
+				"name": "instance_name",
+				"description": "The instance to shutdown.",
+				"type": 3,
+				"required": true,
+				"autocomplete": true
+			}
+		]
+	},
+	{
+		"name": "restart",
+		"description": "Restart the specified instance.",
+		"type": 1,
+		"options": [
+			{
+				"name": "instance_name",
+				"description": "The instance to restart.",
+				"type": 3,
+				"required": true,
+				"autocomplete": true
+			}
+		]
+	}
+]
