@@ -1,5 +1,5 @@
 import { Option, Result } from "@mikuroxina/mini-fn";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import { registerCommand } from "./commands/register";
 
@@ -38,12 +38,11 @@ const { DISCORD_API_TOKEN, WHITELIST_USERS, DISCORD_GUILD_ID } = envs[1];
 const intents: GatewayIntentBits[] = [GatewayIntentBits.GuildMembers];
 const client = new Client({ intents });
 
-client.on("ready", async () => {
+client.on(Events.ClientReady, async () => {
 	const clientUser = client.user;
 	if (clientUser === null) {
 		throw new Error("Failed to get client user");
 	}
-	console.log(`Logged in as ${clientUser.tag}`);
 
 	const result = await registerCommand(
 		DISCORD_API_TOKEN,
@@ -53,7 +52,9 @@ client.on("ready", async () => {
 	if (Result.isErr(result)) {
 		throw new Error(result[1].message);
 	}
-	console.log("Successfully registered commands");
+	console.log("Successfully registered commands.");
+
+	console.log("Logged in as", clientUser.tag);
 });
 
 client.login(DISCORD_API_TOKEN);
