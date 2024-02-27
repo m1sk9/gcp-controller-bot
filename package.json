@@ -11,7 +11,9 @@
     "url": "https://m1sk9.dev"
   },
   "scripts": {
-    "start": "bun run src/index.ts",
+    "dev": "bun run src/index.ts",
+    "start": "bun run build/index.js",
+    "build": "bun build --entrypoints ./src/index.ts --outdir ./build --target bun --minify",
     "format": "bunx @biomejs/biome format --write ./src",
     "lint": "bunx @biomejs/biome lint ./src",
     "check": "bunx @biomejs/biome check --apply ./src",
