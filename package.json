@@ -15,6 +15,7 @@
     "format": "bunx @biomejs/biome format --write ./src",
     "lint": "bunx @biomejs/biome lint ./src",
     "check": "bunx @biomejs/biome check --apply ./src",
+    "check:type": "tsc --noEmit",
     "postinstall": "lefthook install"
   },
   "dependencies": {
