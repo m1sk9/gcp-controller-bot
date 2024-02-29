@@ -1,7 +1,7 @@
 {
   "name": "gcp-controller-bot",
   "module": "./src/index.ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Discord Bot to remotely control Google Cloud. ",
   "type": "module",
   "packageManager": "bun@1.0.29",
