@@ -1,17 +1,9 @@
 # gcp-controller-bot
 
+[![build](https://github.com/m1sk9/gcp-controller-bot/actions/workflows/build.yaml/badge.svg)](https://github.com/m1sk9/gcp-controller-bot/actions/workflows/build.yaml)
+[![Release gcp-controller-bot](https://github.com/m1sk9/gcp-controller-bot/actions/workflows/release.yaml/badge.svg)](https://github.com/m1sk9/gcp-controller-bot/actions/workflows/release.yaml)
+
 gcp-controller-bot is a discord bot that controls the Google Cloud resources (Compute Engine only).
-
-> [!IMPORTANT]
->
-> This bot is still in development and is not ready for production use.
-
-**Todo:**
-
-- [ ] Add instance launch commands.
-- [ ] Add instance shutdown commands.
-
-- [ ] Add instance restart command
 
 ## Installation
 
@@ -47,7 +39,16 @@ First, you need to docker compose file.
 
 (You can also obtain and run the Compose files from this repository with curl.)
 
-TODO: Add docker-compose file.
+```yaml
+services:
+  bot:
+    image: ghcr.io/m1sk9/gcp-controller-bot:v0
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./.env-files:/.env-files
+```
 
 Next, you need to create a [`.env` file][env-file] in the root directory of the project. You can use the `.env.example` file as a template.
 
@@ -62,10 +63,6 @@ Finally, you can start the bot with the following command:
 ```sh
 docker compose up -d
 ```
-
-## Usage
-
-TODO: Add usage.
 
 ## Environment Variables
 
