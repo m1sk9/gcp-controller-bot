@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/m1sk9/gcp-controller-bot/compare/gcp-controller-bot-v1.0.2...gcp-controller-bot-v1.0.3) (2024-02-29)
+
+
+### Bug Fixes
+
+* fix permission ([c673700](https://github.com/m1sk9/gcp-controller-bot/commit/c673700f25ff31abaae28162489620b3e445894b))
+
 ## [1.0.2](https://github.com/m1sk9/gcp-controller-bot/compare/gcp-controller-bot-v1.0.1...gcp-controller-bot-v1.0.2) (2024-02-29)
 
 
