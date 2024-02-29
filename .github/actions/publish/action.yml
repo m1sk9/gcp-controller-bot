@@ -34,8 +34,8 @@ runs:
       with:
         push: true
         tags: |
-          ghcr.io/m1sk9/gcp-controller-bot:latest
-          ghcr.io/m1sk9/gcp-controller-bot:${{ inputs.sha }}
-          ghcr.io/m1sk9/gcp-controller-bot:v${{ inputs.major }}
-          ghcr.io/m1sk9/gcp-controller-bot:v${{ inputs.major }}.${{ inputs.minor }}
-          ghcr.io/m1sk9/gcp-controller-bot:v${{ inputs.major }}.${{ inputs.minor }}.${{ inputs.patch }}
+          ghcr.io/m1sk9/gcp_controller_bot:latest
+          ghcr.io/m1sk9/gcp_controller_bot:${{ inputs.sha }}
+          ghcr.io/m1sk9/gcp_controller_bot:v${{ inputs.major }}
+          ghcr.io/m1sk9/gcp_controller_bot:v${{ inputs.major }}.${{ inputs.minor }}
+          ghcr.io/m1sk9/gcp_controller_bot:v${{ inputs.major }}.${{ inputs.minor }}.${{ inputs.patch }}
