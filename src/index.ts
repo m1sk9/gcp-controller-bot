@@ -1,6 +1,8 @@
 import { Option, Result } from "@mikuroxina/mini-fn";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
+import { getInstancesList } from "./apis/instance";
+import { responseAutocomplete } from "./commands/autocomplate";
 import { registerCommand } from "./commands/register";
 
 dotenv.config();
@@ -9,15 +11,22 @@ interface BotEnvs {
 	DISCORD_API_TOKEN: string;
 	WHITELIST_USERS: string[];
 	DISCORD_GUILD_ID: string;
+	GCP_PROJECT_ID: string;
 }
 
 export function getEnvs(): Option.Option<BotEnvs> {
-	const { DISCORD_API_TOKEN, WHITELIST_USERS, DISCORD_GUILD_ID } = process.env;
+	const {
+		DISCORD_API_TOKEN,
+		WHITELIST_USERS,
+		DISCORD_GUILD_ID,
+		GCP_PROJECT_ID,
+	} = process.env;
 
 	if (
 		DISCORD_API_TOKEN === undefined ||
 		WHITELIST_USERS === undefined ||
-		DISCORD_GUILD_ID === undefined
+		DISCORD_GUILD_ID === undefined ||
+		GCP_PROJECT_ID === undefined
 	) {
 		return Option.none();
 	}
@@ -27,6 +36,7 @@ export function getEnvs(): Option.Option<BotEnvs> {
 		DISCORD_API_TOKEN,
 		WHITELIST_USERS: whitelistUsers,
 		DISCORD_GUILD_ID,
+		GCP_PROJECT_ID,
 	});
 }
 
@@ -34,7 +44,8 @@ const envs = getEnvs();
 if (Option.isNone(envs)) {
 	throw new Error("Environment variables are not set properly");
 }
-const { DISCORD_API_TOKEN, WHITELIST_USERS, DISCORD_GUILD_ID } = envs[1];
+const { DISCORD_API_TOKEN, WHITELIST_USERS, DISCORD_GUILD_ID, GCP_PROJECT_ID } =
+	envs[1];
 const intents: GatewayIntentBits[] = [GatewayIntentBits.GuildMembers];
 const client = new Client({ intents });
 
@@ -55,6 +66,12 @@ client.on(Events.ClientReady, async () => {
 	console.log("Successfully registered commands.");
 
 	console.log("Logged in as", clientUser.tag);
+});
+
+client.on(Events.InteractionCreate, async (interaction) => {
+	if (interaction.isAutocomplete()) {
+		await responseAutocomplete(interaction, GCP_PROJECT_ID);
+	}
 });
 
 client.login(DISCORD_API_TOKEN);
