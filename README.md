@@ -76,5 +76,7 @@ This table shows the environment variables that you need to set:
 | `DISCORD_API_TOKEN` | Your discord bot token. |
 | `DISCORD_GUILD_ID` | Your discord guild id. |
 | `WHITELIST_USERS` | IDs of users allowed to use the command. (separated by commas) |
+| `GCP_PROJECT_ID` | Your Google Cloud project id. |
+| `GOOGLE_APPLICATION_CREDENTIALS` | The path to your Google Cloud credentials file. |
 
 [env-file]: #environment-variables
