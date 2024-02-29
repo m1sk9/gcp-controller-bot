@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/m1sk9/gcp-controller-bot/compare/gcp-controller-bot-v1.0.0...gcp-controller-bot-v1.0.1) (2024-02-29)
+
+
+### Bug Fixes
+
+* **docker:** fix ghcr.io URL ([#11](https://github.com/m1sk9/gcp-controller-bot/issues/11)) ([7322218](https://github.com/m1sk9/gcp-controller-bot/commit/73222187e7f40ccce741fe8388f4a4aa63316771))
+
 ## 1.0.0 (2024-02-29)
 
 
