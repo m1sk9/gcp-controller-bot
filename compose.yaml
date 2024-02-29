@@ -1,6 +1,6 @@
 services:
   bot:
-    image: ghcr.io/m1sk9/gcp_controller_bot:v0
+    image: ghcr.io/m1sk9/gcp_controller_bot:v1
     restart: always
     env_file:
       - .env
