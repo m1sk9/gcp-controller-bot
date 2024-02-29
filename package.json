@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "start": "bun run build/index.js",
-    "build": "bun build --entrypoints ./src/index.ts --outdir ./build --target bun --minify",
+    "build": "bun build --entrypoints ./src/index.ts --outdir ./build --target bun",
     "format": "bunx @biomejs/biome format --write ./src",
     "lint": "bunx @biomejs/biome lint ./src",
     "check": "bunx @biomejs/biome check ./src",

@@ -42,7 +42,7 @@ export async function registerCommand(
 async function getRegisterCommands(): Promise<
 	Result.Result<Error, CommandData[]>
 > {
-	const commandsDataFile = Bun.file("./src/commands/commands.json");
+	const commandsDataFile = Bun.file("./public/commands.json");
 
 	try {
 		const commandsData = (await commandsDataFile.json()) as CommandData[];
