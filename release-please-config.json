@@ -1,0 +1,9 @@
+{
+  "last-release-sha": "a086282ba737772748fc103ad33c1f5fc2bb5ace",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "gcp-controller-bot"
+    }
+  }
+}
