@@ -13,25 +13,25 @@
   "scripts": {
     "dev": "bun run src/index.ts",
     "start": "bun run build/index.js",
-    "build": "bun build --entrypoints ./src/index.ts --outdir ./build --target bun --minify",
+    "build": "bun build --entrypoints ./src/index.ts --outdir ./build --target bun",
     "format": "bunx @biomejs/biome format --write ./src",
     "lint": "bunx @biomejs/biome lint ./src",
     "check": "bunx @biomejs/biome check ./src",
     "check:apply": "bunx @biomejs/biome check --apply ./src",
     "check:type": "tsc --noEmit",
-    "postinstall": "lefthook install"
+    "prepublishOnly": "lefthook install"
   },
   "dependencies": {
     "@google-cloud/compute": "^4.2.0",
     "@mikuroxina/mini-fn": "^5.6.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
-    "google-auth-library": "^9.6.3"
+    "google-auth-library": "^9.6.3",
+    "lefthook": "^1.6.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
-    "@types/bun": "^1.0.7",
-    "lefthook": "^1.6.2"
+    "@types/bun": "^1.0.7"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
