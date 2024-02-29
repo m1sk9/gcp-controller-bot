@@ -1,6 +1,6 @@
 import compute from "@google-cloud/compute";
-import { Result } from "@mikuroxina/mini-fn";
-import type { InstanceListType } from "./types";
+import { Option, Result } from "@mikuroxina/mini-fn";
+import type { InstanceType } from "./types";
 
 export function createInstancesClient() {
 	const client = new compute.InstancesClient();
@@ -9,15 +9,15 @@ export function createInstancesClient() {
 
 export async function getInstancesList(
 	projectId: string,
-): Promise<Result.Result<Error, InstanceListType[]>> {
-	const instancesClient = createInstancesClient();
+): Promise<Result.Result<Error, InstanceType[]>> {
+	const client = createInstancesClient();
 
-	const instanceListRequest = instancesClient.aggregatedListAsync({
+	const instanceListRequest = client.aggregatedListAsync({
 		project: projectId,
 		maxResults: 10,
 	});
 
-	const instanceList: InstanceListType[] = [];
+	const instanceList: InstanceType[] = [];
 
 	for await (const [zone, instancesObject] of instanceListRequest) {
 		const instances = instancesObject.instances;
@@ -38,6 +38,31 @@ export async function getInstancesList(
 		}
 	}
 
-	console.log(instanceList);
 	return Result.ok(instanceList);
+}
+
+export async function getInstance(
+	projectId: string,
+	name: string,
+): Promise<Option.Option<InstanceType>> {
+	const instanceListRequest = await getInstancesList(projectId);
+	if (Result.isErr(instanceListRequest)) {
+		return Option.none();
+	}
+
+	const findResult = instanceListRequest[1].find(
+		(instance) => instance.instanceName === name,
+	);
+
+	if (findResult === undefined) {
+		return Option.none();
+	}
+
+	const instance: InstanceType = {
+		instanceName: findResult.instanceName,
+		zone: findResult.zone.replace("zones/", ""),
+		machineType: findResult.machineType,
+	};
+
+	return Option.some(instance);
 }

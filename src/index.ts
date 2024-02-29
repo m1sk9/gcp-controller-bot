@@ -1,6 +1,7 @@
 import { Option, Result } from "@mikuroxina/mini-fn";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
+import { launchInstance, shutdownInstance } from "./apis/action";
 import { getInstancesList } from "./apis/instance";
 import { responseAutocomplete } from "./commands/autocomplate";
 import { registerCommand } from "./commands/register";
@@ -69,7 +70,36 @@ client.on(Events.ClientReady, async () => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-	if (interaction.isAutocomplete()) {
+	if (interaction.isChatInputCommand()) {
+		const authorId = interaction.user.id;
+		const instanceName = interaction.options.getString("instance_name", true);
+
+		if (!WHITELIST_USERS.includes(authorId)) {
+			await interaction.reply("You are not allowed to use this command.");
+			return;
+		}
+
+		switch (interaction.commandName) {
+			case "launch": {
+				const result = await launchInstance(GCP_PROJECT_ID, instanceName);
+				if (Result.isErr(result)) {
+					await interaction.reply(result[1].message);
+					return;
+				}
+				await interaction.reply(`Instance ${instanceName} started.`);
+				break;
+			}
+			case "shutdown": {
+				const result = await shutdownInstance(GCP_PROJECT_ID, instanceName);
+				if (Result.isErr(result)) {
+					await interaction.reply(result[1].message);
+					return;
+				}
+				await interaction.reply(`Instance ${instanceName} stopped.`);
+				break;
+			}
+		}
+	} else if (interaction.isAutocomplete()) {
 		await responseAutocomplete(interaction, GCP_PROJECT_ID);
 	}
 });
