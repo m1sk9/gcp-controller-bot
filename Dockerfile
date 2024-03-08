@@ -1,4 +1,4 @@
-FROM oven/bun:1.0.29-slim as Build
+FROM oven/bun:1.0.30-slim as Build
 
 SHELL [ "/bin/bash", "-c" ]
 WORKDIR /app
