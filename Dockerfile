@@ -13,7 +13,7 @@ RUN cp -r /app/{package.json,bun.lockb} . \
     && cp -r /app/public . \
     && cp -r /app/build/ .
 
-FROM ubuntu:jammy-20240212 as Runner
+FROM ubuntu:jammy-20240227 as Runner
 
 COPY --from=build /usr/local/bin/ /usr/local/bin/
 COPY --from=Build /build .
